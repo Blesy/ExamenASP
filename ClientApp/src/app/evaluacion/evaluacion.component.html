@@ -1,0 +1,73 @@
+<div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">ID</th>
+        <td>{{prospecto.prospectoID}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Apellido Paterno</th>
+        <td>{{prospecto.apellidoPaterno}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Apellido Materno</th>
+        <td>{{prospecto.apellidoMaterno}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Calle</th>
+        <td>{{prospecto.calle}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Numero</th>
+        <td>{{prospecto.numero}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Colonia</th>
+        <td>{{prospecto.colonia}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Codigo Postal</th>
+        <td>{{prospecto.codigoPostal}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Telefono</th>
+        <td>{{prospecto.telefono}}</td>
+      </tr>
+      <tr>
+        <th scope="row">RFC</th>
+        <td>{{prospecto.rfc}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Estatus</th>
+        <td *ngIf="!actualizable">{{prospecto.estatus}}</td>
+        <td *ngIf="actualizable">
+          <select name="estatus" id="estatus" [(ngModel)]="prospecto.estatus" class="form-select">
+            <option value="Autorizado">Autorizado</option>
+            <option value="Rechazado">Rechazado</option>
+          </select>
+      </tr>
+      <tr>
+        <th scope="row">Observaciones</th>
+        <td *ngIf="!actualizable">{{prospecto.observaciones}}</td>
+        <td class="input-group" *ngIf="actualizable">
+            <textarea class="form-control" [(ngModel)]="prospecto.observaciones"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="2" class="text-center">Documentos</th>
+      </tr>
+      <tr>
+        <th class="text-center">Nombre</th>
+        <th class="text-center">Archivo</th>
+      </tr>
+      <tr *ngFor="let item of prospecto.documentos">
+        <th class="text-center">{{item.nombre}}</th>
+        <td class="text-center"><button type="button" class="btn btn-light" (click)="descargarArchivo(item)">Ver</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-around">
+    <a href="/lista" class="btn btn-light" role="button">Volver</a>
+    <button *ngIf="prospecto.estatus != 'Enviado' && prospecto.observaciones && actualizable" type="button" (click)="guardarEvaluacion()" class="btn btn-light">Guardar</button>
+  </div>
+</div>

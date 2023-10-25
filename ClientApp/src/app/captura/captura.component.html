@@ -1,0 +1,112 @@
+<h1>Captura del prospecto</h1>
+
+<form name="prospectoForm" #formularioProspecto="ngForm" (ngSubmit)="onSubmit()">
+  <p>
+    Nombre: <br />
+    <span>
+      <input type="text" name="nombre" placeholder="Nombre del prospecto" [(ngModel)]="prospectoModel.Nombre">
+    </span>
+    <br />
+    <span *ngIf="!exampleModel.Nombre" class="req">
+      Este es un campo obligatorio.
+    </span>
+  </p>
+  <p>
+    Primer apellido: <br />
+    <span>
+      <input type="text" name="apellidoPaterno" placeholder="Primer apellido" [(ngModel)]="prospectoModel.ApellidoPaterno" ng-required="true">
+    </span>
+    <br />
+    <span *ngIf="!exampleModel.ApellidoPaterno" class="req">
+      Este es un campo obligatorio.
+    </span>
+  </p>
+  <p>
+    Segundo apellido: <br />
+    <span>
+      <input type="text" name="apellidoMaterno" placeholder="Segundo apellido" [(ngModel)]="prospectoModel.ApellidoMaterno">
+    </span>
+    <br />
+  </p>
+  <p>
+    Calle: <br />
+    <span>
+      <input type="text" name="calle" placeholder="Calle" [(ngModel)]="prospectoModel.Calle">
+    </span>
+    <br />
+    <span *ngIf="!exampleModel.Calle" class="req">
+      Este es un campo obligatorio.
+    </span>
+  </p>
+  <p>
+    Numero: <br />
+    <span>
+      <input type="number" name="numero" placeholder="Numero" [(ngModel)]="prospectoModel.Numero">
+    </span>
+    <br />
+    <span *ngIf="exampleModel.Numero <= 0" class="req">
+      Este es un campo obligatorio.
+    </span>
+  </p>
+  <p>
+    Colonia: <br />
+    <span>
+      <input type="text" name="colonia" placeholder="Colonia" [(ngModel)]="prospectoModel.Colonia">
+    </span>
+    <br />
+    <span *ngIf="!exampleModel.Colonia" class="req">
+      Este es un campo obligatorio.
+    </span>
+  </p>
+  <p>
+    Codigo postal: <br />
+    <span>
+      <input type="number" name="codigoPostal" placeholder="Codigo postal" [(ngModel)]="prospectoModel.CodigoPostal">
+    </span>
+    <br />
+    <span *ngIf="exampleModel.CodigoPostal <= 0" class="req">
+      Este es un campo obligatorio.
+    </span>
+  </p>
+  <p>
+    Telefono: <br />
+    <span>
+      <input type="text" name="telefono" placeholder="Telefono" [(ngModel)]="prospectoModel.Telefono">
+    </span>
+    <br />
+    <span *ngIf="exampleModel.Telefono.length != 10" class="req">
+      Este es un campo obligatorio.
+    </span>
+  </p>
+  <p>
+    RFC: <br />
+    <span>
+      <input type="text" name="rfc" placeholder="RFC" [(ngModel)]="prospectoModel.RFC">
+    </span>
+    <br />
+    <span *ngIf="exampleModel.RFC.length != 13" class="req">
+      Este es un campo obligatorio.
+    </span>
+  </p>
+
+  <p>
+    Documentos: <br />
+    <button (click)="agregarDoc()" name="agregarDocumento" type="button">+</button>
+    <br /><br />
+    <span *ngFor="let documento of prospectoModel.Documentos; let i=index">
+      <span>
+        <input type="text" [name]="'nombreDocumento'+i" placeholder="Nombre del documento" [(ngModel)]="prospectoModel.Documentos[i].Nombre" />
+        <input type="file" [name]="'documento'+i" [(ngModel)]="prospectoModel.Documentos[i].Archivo" (change)="handleUpload($event, i)">
+      </span><br /><br />
+    </span>
+    <span *ngIf="!exampleModel.Documentos[0].Nombre || !exampleModel.Documentos[0].Archivo" class="req">
+      Este es un campo obligatorio.
+    </span>
+  </p>
+
+  <button type="submit">Guardar</button>
+  <br /><br />
+  <button type="button" (click)="salir()">Salir</button>
+</form>
+
+

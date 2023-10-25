@@ -1,0 +1,91 @@
+<table *ngIf="vistaLista" class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Primer Apellido</th>
+      <th scope="col">Segundo Apellido</th>
+      <th scope="col">Estatus</th>
+      <th scope="col">Ver</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <th scope="row">
+        {{item.prospectoID}}
+      </th>
+      <td>{{item.nombre}}</td>
+      <td>{{item.apellidoPaterno}}</td>
+      <td>{{item.apellidoMaterno}}</td>
+      <td>{{item.estatus}}</td>
+      <td><button type="button" (click)="interpolarVista(item.prospectoID)" class="btn btn-light">Ver</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="!vistaLista">
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">ID</th>
+        <td>{{prospecto.prospectoID}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Apellido Paterno</th>
+        <td>{{prospecto.apellidoPaterno}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Apellido Materno</th>
+        <td>{{prospecto.apellidoMaterno}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Calle</th>
+        <td>{{prospecto.calle}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Numero</th>
+        <td>{{prospecto.numero}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Colonia</th>
+        <td>{{prospecto.colonia}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Codigo Postal</th>
+        <td>{{prospecto.codigoPostal}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Telefono</th>
+        <td>{{prospecto.telefono}}</td>
+      </tr>
+      <tr>
+        <th scope="row">RFC</th>
+        <td>{{prospecto.rfc}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Estatus</th>
+        <td>{{prospecto.estatus}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Observaciones</th>
+        <td>{{prospecto.observaciones}}</td>
+      </tr>
+      <tr>
+        <th colspan="2" class="text-center">Documentos</th>
+      </tr>
+      <tr>
+        <th class="text-center">Nombre</th>
+        <th class="text-center">Archivo</th>
+      </tr>
+      <tr *ngFor="let item of prospecto.documentos">
+        <th class="text-center">{{item.nombre}}</th>
+        <td class="text-center"><button type="button" class="btn btn-light" (click)="descargarArchivo(item)">Ver</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-around">
+    <button type="button" (click)="interpolarVista(0)" class="btn btn-light">Volver</button>
+    <a *ngIf="prospecto.estatus == 'Enviado'" [href]="'/evaluacion/'+prospecto.prospectoID" class="btn btn-light" role="button">Editar</a>
+  </div>
+</div>
+
